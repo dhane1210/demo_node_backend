@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics Tracker — Test Console</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+        }
+        body { background: #0f1117; font-family: 'Segoe UI', system-ui, sans-serif; }
+        .navbar { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%) !important; border-bottom: 1px solid rgba(99,102,241,.3); }
+        .navbar-brand { font-weight: 700; letter-spacing: .5px; }
+        .nav-pills .nav-link { color: #94a3b8; border-radius: 8px; transition: all .2s; }
+        .nav-pills .nav-link:hover { color: #e2e8f0; background: rgba(99,102,241,.15); }
+        .nav-pills .nav-link.active { background: var(--accent); color: #fff; }
+        .card { background: #1a1d2e; border: 1px solid #2d3148; border-radius: 12px; }
+        .card-header { background: rgba(99,102,241,.08); border-bottom: 1px solid #2d3148; font-weight: 600; }
+        .btn-primary { background: var(--accent); border-color: var(--accent); }
+        .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+        .btn-outline-primary { color: var(--accent); border-color: var(--accent); }
+        .btn-outline-primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .table { color: #cbd5e1; }
+        .table thead th { border-bottom-color: #2d3148; color: #94a3b8; font-weight: 600; font-size: .85rem; text-transform: uppercase; letter-spacing: .5px; }
+        .table td { border-color: #2d3148; vertical-align: middle; }
+        .badge-status { font-size: .75rem; padding: 4px 10px; border-radius: 6px; font-weight: 600; }
+        .badge-ON_SCHEDULE, .badge-IN_TRANSIT { background: rgba(34,197,94,.15); color: #4ade80; }
+        .badge-DELAYED { background: rgba(239,68,68,.15); color: #f87171; }
+        .badge-ARRIVED, .badge-COMPLETED { background: rgba(59,130,246,.15); color: #60a5fa; }
+        .badge-PLANNED { background: rgba(163,163,163,.15); color: #a3a3a3; }
+        .badge-OPEN { background: rgba(251,191,36,.15); color: #fbbf24; }
+        .badge-ACKNOWLEDGED { background: rgba(59,130,246,.15); color: #60a5fa; }
+        .badge-RESOLVED { background: rgba(34,197,94,.15); color: #4ade80; }
+        .badge-HIGH { background: rgba(239,68,68,.15); color: #f87171; }
+        .badge-MEDIUM { background: rgba(251,191,36,.15); color: #fbbf24; }
+        .badge-LOW { background: rgba(34,197,94,.15); color: #4ade80; }
+        .form-control, .form-select { background: #12141f; border-color: #2d3148; color: #e2e8f0; }
+        .form-control:focus, .form-select:focus { background: #12141f; border-color: var(--accent); color: #e2e8f0; box-shadow: 0 0 0 .2rem rgba(99,102,241,.25); }
+        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; }
+        .toast-msg { padding: 12px 20px; border-radius: 8px; margin-bottom: 8px; font-size: .9rem; animation: slideIn .3s ease; }
+        .toast-success { background: rgba(34,197,94,.9); color: #fff; }
+        .toast-error { background: rgba(239,68,68,.9); color: #fff; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+        .spinner-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 9998; align-items: center; justify-content: center; }
+        .spinner-overlay.active { display: flex; }
+        .detail-label { color: #64748b; font-size: .8rem; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px; }
+        .detail-value { color: #e2e8f0; font-size: 1rem; margin-bottom: 12px; }
+        .section-title { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+        .section-title i { color: var(--accent); }
+        .event-timeline { position: relative; padding-left: 24px; }
+        .event-timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: #2d3148; }
+        .event-item { position: relative; padding: 8px 0; }
+        .event-item::before { content: ''; position: absolute; left: -20px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid #1a1d2e; }
+        .event-item.actual::before { background: #4ade80; }
+        .stat-card { text-align: center; padding: 20px; }
+        .stat-card .stat-number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+        .stat-card .stat-label { color: #64748b; font-size: .85rem; }
+        pre.json-display { background: #12141f; border: 1px solid #2d3148; border-radius: 8px; padding: 16px; color: #94a3b8; font-size: .8rem; max-height: 400px; overflow: auto; }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark px-4 py-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><i class="bi bi-box-seam me-2"></i>Logistics Tracker</a>
+        <span class="badge bg-success">Test Console</span>
+    </div>
+</nav>
+
+<!-- Spinner -->
+<div class="spinner-overlay" id="spinner">
+    <div class="spinner-border text-light" style="width:3rem;height:3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<div class="container-fluid py-4 px-4">
+    <!-- Tab Navigation -->
+    <ul class="nav nav-pills mb-4" id="mainTabs">
+        <li class="nav-item"><a class="nav-link active" data-tab="track" href="#"><i class="bi bi-search me-1"></i>Track Shipment</a></li>
+        <li class="nav-item"><a class="nav-link" data-tab="dashboard" href="#"><i class="bi bi-grid me-1"></i>Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" data-tab="alerts" href="#"><i class="bi bi-bell me-1"></i>Alerts</a></li>
+        <li class="nav-item"><a class="nav-link" data-tab="webhooks" href="#"><i class="bi bi-plug me-1"></i>Test Webhook</a></li>
+    </ul>
+
+    <!-- ═══════════════════ TAB: TRACK SHIPMENT ═══════════════════ -->
+    <div class="tab-content" id="tab-track">
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="card">
+                    <div class="card-header px-4 py-3"><i class="bi bi-search me-2"></i>Manual Container Search</div>
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <label class="form-label">Container / BL / Booking Number <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="trackNumber" placeholder="e.g. MSDU5213740">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Sealine <small class="text-muted">(optional)</small></label>
+                            <input type="text" class="form-control" id="trackSealine" placeholder="e.g. MSC, MAEU, HLCU">
+                        </div>
+                        <button class="btn btn-primary w-100" id="btnTrack"><i class="bi bi-geo-alt me-1"></i>Track Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="card" id="trackResultCard" style="display:none;">
+                    <div class="card-header px-4 py-3"><i class="bi bi-info-circle me-2"></i>Tracking Result</div>
+                    <div class="card-body p-4" id="trackResult"></div>
+                </div>
+                <div class="card" id="trackPlaceholder">
+                    <div class="card-body p-5 text-center text-muted">
+                        <i class="bi bi-box-seam" style="font-size:3rem;"></i>
+                        <p class="mt-3 mb-0">Enter a container number and click <strong>Track Now</strong> to search.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ TAB: DASHBOARD ═══════════════════ -->
+    <div class="tab-content" id="tab-dashboard" style="display:none;">
+        <div class="row g-3 mb-4" id="statsRow"></div>
+        <div class="card">
+            <div class="card-header px-4 py-3 d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-grid me-2"></i>All Shipments</span>
+                <button class="btn btn-sm btn-outline-primary" onclick="loadDashboard()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Shipment #</th>
+                                <th>Vessel</th>
+                                <th>POL</th>
+                                <th>POD</th>
+                                <th>ETD</th>
+                                <th>ETA</th>
+                                <th>Status</th>
+                                <th>Last Synced</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboardBody">
+                            <tr><td colspan="9" class="text-center text-muted py-4">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipment Detail Modal -->
+        <div class="modal fade" id="detailModal" tabindex="-1">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content" style="background:#1a1d2e; border-color:#2d3148;">
+                    <div class="modal-header" style="border-color:#2d3148;">
+                        <h5 class="modal-title"><i class="bi bi-box-seam me-2"></i>Shipment Detail</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="detailBody">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ TAB: ALERTS ═══════════════════ -->
+    <div class="tab-content" id="tab-alerts" style="display:none;">
+        <div class="card">
+            <div class="card-header px-4 py-3 d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-bell me-2"></i>Notifications / Alerts</span>
+                <div class="d-flex gap-2">
+                    <select class="form-select form-select-sm" id="alertStatusFilter" style="width:auto;" onchange="loadAlerts()">
+                        <option value="">All Status</option>
+                        <option value="OPEN">Open</option>
+                        <option value="ACKNOWLEDGED">Acknowledged</option>
+                        <option value="RESOLVED">Resolved</option>
+                    </select>
+                    <select class="form-select form-select-sm" id="alertSeverityFilter" style="width:auto;" onchange="loadAlerts()">
+                        <option value="">All Severity</option>
+                        <option value="HIGH">High</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="LOW">Low</option>
+                    </select>
+                    <button class="btn btn-sm btn-outline-primary" onclick="loadAlerts()"><i class="bi bi-arrow-clockwise"></i></button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Shipment</th>
+                                <th>Info</th>
+                                <th>Severity</th>
+                                <th>Status</th>
+                                <th>Detected</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alertsBody">
+                            <tr><td colspan="6" class="text-center text-muted py-4">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ TAB: WEBHOOK TEST ═══════════════════ -->
+    <div class="tab-content" id="tab-webhooks" style="display:none;">
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="card">
+                    <div class="card-header px-4 py-3"><i class="bi bi-plug me-2"></i>Simulate Webhook Event</div>
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <label class="form-label">Event Type</label>
+                            <select class="form-select" id="webhookEventType">
+                                <option value="container.arrival.at.first.pol">container.arrival.at.first.pol</option>
+                                <option value="container.arrival.at.final.pod">container.arrival.at.final.pod</option>
+                                <option value="vessel.arrival.at.final.pod">vessel.arrival.at.final.pod</option>
+                                <option value="container.departure.from.first.pol">container.departure.from.first.pol</option>
+                                <option value="container.departure.from.final.pod">container.departure.from.final.pod</option>
+                                <option value="vessel.departure.from.first.pol">vessel.departure.from.first.pol</option>
+                                <option value="container.loaded.at.first.pol">container.loaded.at.first.pol</option>
+                                <option value="container.discharge.at.final.pod">container.discharge.at.final.pod</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Shipment Number</label>
+                            <input type="text" class="form-control" id="webhookShipmentNumber" placeholder="e.g. MSDU5213740">
+                        </div>
+                        <button class="btn btn-primary w-100" id="btnWebhook"><i class="bi bi-send me-1"></i>Send Webhook</button>
+                        <div class="mt-3" id="webhookResponse" style="display:none;">
+                            <label class="form-label text-muted">Response</label>
+                            <pre class="json-display" id="webhookResponseBody"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="card">
+                    <div class="card-header px-4 py-3"><i class="bi bi-clock-history me-2"></i>How Webhooks Work</div>
+                    <div class="card-body p-4">
+                        <div class="alert alert-info mb-3" style="background:rgba(99,102,241,.1); border-color:rgba(99,102,241,.3); color:#c7d2fe;">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Sinay sends webhooks to <code>POST /api/v1/webhooks/sinay</code> whenever a tracked shipment has an update. This panel lets you simulate those events.
+                        </div>
+                        <h6 class="mb-3">Webhook Flow:</h6>
+                        <ol class="text-muted" style="line-height:2;">
+                            <li>User tracks a container via <strong>Track Shipment</strong> tab → stored in DB</li>
+                            <li>Sinay sends webhook events (arrival, departure, etc.) to your endpoint</li>
+                            <li>The webhook handler creates <strong>Alerts/Notifications</strong></li>
+                            <li>Additionally, a <strong>cron job</strong> syncs all active shipments every 4 hours</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API = '/api/v1';
+
+// ─── Utilities ────────────────────────────────────────────
+function showSpinner() { document.getElementById('spinner').classList.add('active'); }
+function hideSpinner() { document.getElementById('spinner').classList.remove('active'); }
+
+function toast(msg, type = 'success') {
+    const el = document.createElement('div');
+    el.className = `toast-msg toast-${type}`;
+    el.textContent = msg;
+    document.getElementById('toast-container').appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+}
+
+async function apiCall(url, options = {}) {
+    showSpinner();
+    try {
+        const res = await fetch(url, {
+            headers: { 'Content-Type': 'application/json', ...options.headers },
+            ...options,
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+        return data;
+    } catch (err) {
+        toast(err.message, 'error');
+        throw err;
+    } finally {
+        hideSpinner();
+    }
+}
+
+function formatDate(d) {
+    if (!d) return '—';
+    try { return new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); }
+    catch { return d; }
+}
+
+function statusBadge(status) {
+    return `<span class="badge badge-status badge-${status || 'PLANNED'}">${status || 'N/A'}</span>`;
+}
+
+// ─── Tab Navigation ───────────────────────────────────────
+document.querySelectorAll('#mainTabs .nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('#mainTabs .nav-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        const tab = link.getAttribute('data-tab');
+        document.getElementById(`tab-${tab}`).style.display = 'block';
+        if (tab === 'dashboard') loadDashboard();
+        if (tab === 'alerts') loadAlerts();
+    });
+});
+
+// ─── Track Shipment ───────────────────────────────────────
+document.getElementById('btnTrack').addEventListener('click', async () => {
+    const number = document.getElementById('trackNumber').value.trim();
+    const sealine = document.getElementById('trackSealine').value.trim();
+    if (!number) { toast('Please enter a container number', 'error'); return; }
+
+    try {
+        const body = { shipment_number: number };
+        if (sealine) body.sealine = sealine;
+
+        const result = await apiCall(`${API}/shipments/track`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+        });
+
+        const s = result.data;
+        document.getElementById('trackPlaceholder').style.display = 'none';
+        document.getElementById('trackResultCard').style.display = 'block';
+        document.getElementById('trackResult').innerHTML = renderShipmentSummary(s);
+        toast('Shipment tracked & stored successfully!');
+    } catch (err) { /* handled by apiCall */ }
+});
+
+function renderShipmentSummary(s) {
+    const containers = s.containers || [];
+    const events = s.events || [];
+    return `
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <div class="detail-label">Shipment Number</div>
+                <div class="detail-value fw-bold">${s.shipment_number || '—'}</div>
+            </div>
+            <div class="col-md-3">
+                <div class="detail-label">Status</div>
+                <div class="detail-value">${statusBadge(s.status)}</div>
+            </div>
+            <div class="col-md-3">
+                <div class="detail-label">Sealine</div>
+                <div class="detail-value">${s.sealine_name || s.sealine || '—'}</div>
+            </div>
+        </div>
+        <div class="row g-3 mb-3">
+            <div class="col-md-3">
+                <div class="detail-label">POL</div>
+                <div class="detail-value">${s.pol_name || '—'}</div>
+            </div>
+            <div class="col-md-3">
+                <div class="detail-label">POD</div>
+                <div class="detail-value">${s.pod_name || '—'}</div>
+            </div>
+            <div class="col-md-3">
+                <div class="detail-label">ETD</div>
+                <div class="detail-value">${formatDate(s.etd)}</div>
+            </div>
+            <div class="col-md-3">
+                <div class="detail-label">ETA</div>
+                <div class="detail-value">${formatDate(s.eta)}</div>
+            </div>
+        </div>
+        <div class="row g-3 mb-3">
+            <div class="col-md-4">
+                <div class="detail-label">Vessel</div>
+                <div class="detail-value">${s.vessel_name || '—'}</div>
+            </div>
+            <div class="col-md-4">
+                <div class="detail-label">IMO</div>
+                <div class="detail-value">${s.vessel_imo || '—'}</div>
+            </div>
+            <div class="col-md-4">
+                <div class="detail-label">Last Event</div>
+                <div class="detail-value">${s.last_event || '—'}</div>
+            </div>
+        </div>
+        ${containers.length > 0 ? `
+            <div class="section-title mt-4"><i class="bi bi-box"></i><strong>Containers (${containers.length})</strong></div>
+            <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                    <thead><tr><th>Number</th><th>ISO</th><th>Size/Type</th><th>Status</th></tr></thead>
+                    <tbody>${containers.map(c => `
+                        <tr><td class="fw-bold">${c.number}</td><td>${c.iso_code || '—'}</td><td>${c.size_type || '—'}</td><td>${c.status || '—'}</td></tr>
+                    `).join('')}</tbody>
+                </table>
+            </div>
+        ` : ''}
+        ${events.length > 0 ? `
+            <div class="section-title mt-4"><i class="bi bi-clock-history"></i><strong>Events (${events.length})</strong></div>
+            <div class="event-timeline">${events.slice(0, 15).map(e => `
+                <div class="event-item ${e.is_actual ? 'actual' : ''}">
+                    <div class="d-flex justify-content-between">
+                        <strong style="font-size:.9rem;">${e.description || e.event_type || 'Event'}</strong>
+                        <small class="text-muted">${formatDate(e.date)}</small>
+                    </div>
+                    <small class="text-muted">${[e.location_name, e.location_country].filter(Boolean).join(', ') || ''} ${e.vessel_name ? '· ' + e.vessel_name : ''}</small>
+                </div>
+            `).join('')}</div>
+            ${events.length > 15 ? `<p class="text-muted mt-2 mb-0"><small>... and ${events.length - 15} more events</small></p>` : ''}
+        ` : ''}
+    `;
+}
+
+// ─── Dashboard ────────────────────────────────────────────
+async function loadDashboard() {
+    try {
+        const result = await apiCall(`${API}/shipments?page=1&limit=50`);
+        const shipments = result.data || [];
+        const total = result.pagination?.total || shipments.length;
+
+        // Stats
+        const stats = { total: 0, inTransit: 0, arrived: 0, delayed: 0 };
+        stats.total = total;
+        shipments.forEach(s => {
+            if (s.status === 'IN_TRANSIT' || s.status === 'ON_SCHEDULE') stats.inTransit++;
+            if (s.status === 'ARRIVED' || s.status === 'COMPLETED') stats.arrived++;
+            if (s.status === 'DELAYED') stats.delayed++;
+        });
+        document.getElementById('statsRow').innerHTML = [
+            { label: 'Total Shipments', value: stats.total, icon: 'bi-box-seam', color: '#6366f1' },
+            { label: 'In Transit', value: stats.inTransit, icon: 'bi-truck', color: '#4ade80' },
+            { label: 'Arrived / Completed', value: stats.arrived, icon: 'bi-check-circle', color: '#60a5fa' },
+            { label: 'Delayed', value: stats.delayed, icon: 'bi-exclamation-triangle', color: '#f87171' },
+        ].map(s => `
+            <div class="col-md-3"><div class="card stat-card">
+                <i class="bi ${s.icon}" style="font-size:1.5rem; color:${s.color};"></i>
+                <div class="stat-number" style="color:${s.color};">${s.value}</div>
+                <div class="stat-label">${s.label}</div>
+            </div></div>
+        `).join('');
+
+        // Table
+        if (shipments.length === 0) {
+            document.getElementById('dashboardBody').innerHTML = '<tr><td colspan="9" class="text-center text-muted py-4">No shipments found. Use the Track tab to add one.</td></tr>';
+            return;
+        }
+        document.getElementById('dashboardBody').innerHTML = shipments.map(s => `
+            <tr>
+                <td class="fw-bold">${s.shipment_number || '—'}</td>
+                <td>${s.vessel_name || '—'}</td>
+                <td>${s.pol_name || '—'}</td>
+                <td>${s.pod_name || '—'}</td>
+                <td>${formatDate(s.etd)}</td>
+                <td>${formatDate(s.eta)}</td>
+                <td>${statusBadge(s.status)}</td>
+                <td><small class="text-muted">${formatDate(s.last_synced_at)}</small></td>
+                <td><button class="btn btn-sm btn-outline-primary" onclick="viewDetail('${s.id}')"><i class="bi bi-eye"></i></button></td>
+            </tr>
+        `).join('');
+    } catch (err) { /* handled */ }
+}
+
+async function viewDetail(id) {
+    try {
+        const result = await apiCall(`${API}/shipments/${id}`);
+        const s = result.data;
+        document.getElementById('detailBody').innerHTML = renderShipmentSummary(s);
+        new bootstrap.Modal(document.getElementById('detailModal')).show();
+    } catch (err) { /* handled */ }
+}
+
+// ─── Alerts ───────────────────────────────────────────────
+async function loadAlerts() {
+    try {
+        const status = document.getElementById('alertStatusFilter').value;
+        const severity = document.getElementById('alertSeverityFilter').value;
+        let url = `${API}/alerts?page=1&limit=50`;
+        if (status) url += `&status=${status}`;
+        if (severity) url += `&severity=${severity}`;
+
+        const result = await apiCall(url);
+        const alerts = result.data || [];
+
+        if (alerts.length === 0) {
+            document.getElementById('alertsBody').innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No alerts found.</td></tr>';
+            return;
+        }
+
+        document.getElementById('alertsBody').innerHTML = alerts.map(a => `
+            <tr>
+                <td><span class="badge bg-secondary">${a.alert_type || '—'}</span></td>
+                <td class="fw-bold">${a.shipment_number || '—'}</td>
+                <td style="max-width:300px;">${a.alert_info || '—'}</td>
+                <td>${statusBadge(a.severity)}</td>
+                <td>${statusBadge(a.status)}</td>
+                <td><small class="text-muted">${formatDate(a.detection_date)}</small></td>
+            </tr>
+        `).join('');
+    } catch (err) { /* handled */ }
+}
+
+// ─── Webhook Test ─────────────────────────────────────────
+document.getElementById('btnWebhook').addEventListener('click', async () => {
+    const eventType = document.getElementById('webhookEventType').value;
+    const shipmentNumber = document.getElementById('webhookShipmentNumber').value.trim();
+    if (!shipmentNumber) { toast('Please enter a shipment number', 'error'); return; }
+
+    try {
+        const result = await apiCall(`${API}/webhooks/sinay`, {
+            method: 'POST',
+            headers: { 'svix-event-type': eventType },
+            body: JSON.stringify({
+                eventType,
+                data: { shipmentNumber },
+                shipmentNumber,
+            }),
+        });
+
+        document.getElementById('webhookResponse').style.display = 'block';
+        document.getElementById('webhookResponseBody').textContent = JSON.stringify(result, null, 2);
+        toast('Webhook sent! Check Alerts tab for the notification.');
+    } catch (err) { /* handled */ }
+});
+</script>
+</body>
+</html>

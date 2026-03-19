@@ -1,0 +1,71 @@
+import { z } from 'zod';
+
+export const createShipmentSchema = z.object({
+    shipment_number: z.string().optional(),
+    bl_number: z.string().optional(),
+    booking_number: z.string().optional(),
+    customer_id: z.string().optional(),
+    customer_name: z.string().optional(),
+    shipper: z.string().optional(),
+    consignee: z.string().optional(),
+    sealine: z.string().optional(),
+    sealine_name: z.string().optional(),
+    status: z.enum(['ON_SCHEDULE', 'DELAYED', 'ARRIVED', 'COMPLETED', 'IN_TRANSIT', 'PLANNED']).default('PLANNED'),
+    gross_weight: z.number().optional(),
+    cbm: z.number().optional(),
+    package_count: z.number().optional(),
+    package_type: z.string().optional(),
+    commodity: z.string().optional(),
+    incoterm: z.string().optional(),
+    pickup_location: z.string().optional(),
+    delivery_location: z.string().optional(),
+    pol_name: z.string().optional(),
+    pod_name: z.string().optional(),
+    etd: z.string().optional(),
+    eta: z.string().optional(),
+    cutoff_date: z.string().optional(),
+    delivery_deadline: z.string().optional(),
+    vessel_name: z.string().optional(),
+    notes: z.string().optional(),
+});
+
+export const updateShipmentSchema = z.object({
+    status: z.enum(['ON_SCHEDULE', 'DELAYED', 'ARRIVED', 'COMPLETED', 'IN_TRANSIT', 'PLANNED']).optional(),
+    eta: z.string().optional(),
+    etd: z.string().optional(),
+    notes: z.string().optional(),
+    admin_notes: z.string().optional(),
+    customer_name: z.string().optional(),
+    shipper: z.string().optional(),
+    consignee: z.string().optional(),
+    gross_weight: z.number().optional(),
+    cbm: z.number().optional(),
+    delivery_location: z.string().optional(),
+    pickup_location: z.string().optional(),
+    cutoff_date: z.string().optional(),
+    delivery_deadline: z.string().optional(),
+    commodity: z.string().optional(),
+    package_count: z.number().optional(),
+    package_type: z.string().optional(),
+    incoterm: z.string().optional(),
+});
+
+export const searchShipmentSchema = z.object({
+    q: z.string().optional(),
+    tracking_id: z.string().optional(),
+    shipment_number: z.string().optional(),
+    bl_number: z.string().optional(),
+    container_number: z.string().optional(),
+    vessel_name: z.string().optional(),
+    customer_name: z.string().optional(),
+    date_from: z.string().optional(),
+    date_to: z.string().optional(),
+    status: z.string().optional(),
+    page: z.coerce.number().min(1).default(1),
+    limit: z.coerce.number().min(1).max(100).default(20),
+});
+
+export const trackShipmentSchema = z.object({
+    shipment_number: z.string().min(1, 'Shipment number is required'),
+    sealine: z.string().optional(),
+});

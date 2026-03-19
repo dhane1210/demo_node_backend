@@ -1,0 +1,79 @@
+﻿src/modules/calendar/calendar.repository.ts(34,45): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/calendar/calendar.repository.ts(34,63): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/calendar/calendar.repository.ts(35,17): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/calendar/calendar.routes.ts(2,36): error TS2307: Cannot find module './calendar.controller' or its corresponding type declarations.
+src/modules/communication/communication.repository.ts(47,68): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/communication/communication.repository.ts(48,45): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/communication/communication.repository.ts(48,58): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/pricing/pricing.controller.ts(21,55): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/pricing/pricing.controller.ts(32,52): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/pricing/pricing.controller.ts(40,63): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/pricing/pricing.controller.ts(46,57): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/report/report.controller.ts(20,64): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/shipment/shipment.controller.ts(47,64): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/shipment/shipment.controller.ts(67,63): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/shipment/shipment.controller.ts(79,46): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/shipment/shipment.repository.ts(194,18): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(194,41): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(223,18): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(223,38): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(223,57): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(223,76): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(224,17): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(224,35): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(224,49): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(225,49): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(225,67): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(226,17): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(226,38): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(226,62): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(227,17): error TS2322: Type 'number | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(227,37): error TS2322: Type 'number | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(227,57): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(228,17): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(228,36): error TS2322: Type 'number | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(228,54): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(253,18): error TS2322: Type 'string | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(253,39): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(253,59): error TS2322: Type 'string | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(254,17): error TS2322: Type 'number | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.
+src/modules/shipment/shipment.repository.ts(254,38): error TS2322: Type 'number | null | undefined' is not assignable to type 'SqlValue'.
+  Type 'undefined' is not assignable to type 'SqlValue'.

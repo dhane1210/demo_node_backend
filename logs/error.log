@@ -1,0 +1,190 @@
+2026-03-07 19:16:29 [error]: Sinay API error: 400 /shipment
+2026-03-07 19:16:30 [error]: AxiosError: Request failed with status code 400
+    at settle (F:\node_demo\node_modules\axios\lib\core\settle.js:20:7)
+    at IncomingMessage.handleStreamEnd (F:\node_demo\node_modules\axios\lib\adapters\http.js:844:13)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (F:\node_demo\node_modules\axios\lib\core\Axios.js:46:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\integrations\sinay\sinay.client.ts:56:30)
+    at async SinayClient.withRetry (F:\node_demo\src\integrations\sinay\sinay.client.ts:68:20)
+    at async ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:78:33)
+    at async <anonymous> (F:\node_demo\src\modules\shipment\shipment.controller.ts:88:24)
+2026-03-07 19:16:30 [error]: Error: Failed to track shipment: Request failed with status code 400
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:129:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\modules\shipment\shipment.controller.ts:88:24)
+2026-03-07 19:17:45 [error]: Sinay API error: 400 /shipment
+2026-03-07 19:17:45 [error]: AxiosError: Request failed with status code 400
+    at settle (F:\node_demo\node_modules\axios\lib\core\settle.js:20:7)
+    at IncomingMessage.handleStreamEnd (F:\node_demo\node_modules\axios\lib\adapters\http.js:844:13)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (F:\node_demo\node_modules\axios\lib\core\Axios.js:46:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\integrations\sinay\sinay.client.ts:56:30)
+    at async SinayClient.withRetry (F:\node_demo\src\integrations\sinay\sinay.client.ts:68:20)
+    at async ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:78:33)
+    at async <anonymous> (F:\node_demo\src\modules\shipment\shipment.controller.ts:88:24)
+2026-03-07 19:17:45 [error]: Error: Failed to track shipment: Request failed with status code 400
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:129:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\modules\shipment\shipment.controller.ts:88:24)
+2026-03-07 19:18:19 [error]: Sinay API error: 400 /shipment
+2026-03-07 19:18:19 [error]: AxiosError: Request failed with status code 400
+    at settle (F:\node_demo\node_modules\axios\lib\core\settle.js:20:7)
+    at IncomingMessage.handleStreamEnd (F:\node_demo\node_modules\axios\lib\adapters\http.js:844:13)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (F:\node_demo\node_modules\axios\lib\core\Axios.js:46:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\integrations\sinay\sinay.client.ts:56:30)
+    at async SinayClient.withRetry (F:\node_demo\src\integrations\sinay\sinay.client.ts:68:20)
+    at async ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:78:33)
+    at async <anonymous> (F:\node_demo\src\modules\shipment\shipment.controller.ts:88:24)
+2026-03-07 19:18:19 [error]: Error: Failed to track shipment: Request failed with status code 400
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:129:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\modules\shipment\shipment.controller.ts:88:24)
+2026-03-07 19:20:17 [error]: Sinay API error: undefined /shipment
+2026-03-07 20:00:03 [error]: Sinay API error: 400 /shipment
+2026-03-07 20:00:03 [error]: AxiosError: Request failed with status code 400
+    at settle (F:\node_demo\node_modules\axios\lib\core\settle.js:20:7)
+    at IncomingMessage.handleStreamEnd (F:\node_demo\node_modules\axios\lib\adapters\http.js:844:13)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (F:\node_demo\node_modules\axios\lib\core\Axios.js:46:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\integrations\sinay\sinay.client.ts:56:30)
+    at async SinayClient.withRetry (F:\node_demo\src\integrations\sinay\sinay.client.ts:68:20)
+    at async ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:78:33)
+    at async Task._execution (F:\node_demo\src\jobs\sync-shipments.job.ts:41:21)
+2026-03-07 20:00:03 [error]: Error: Failed to track shipment: Request failed with status code 400
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:129:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Task._execution (F:\node_demo\src\jobs\sync-shipments.job.ts:41:21)
+2026-03-10 00:00:07 [error]: Sinay API error: 400 /shipment
+2026-03-10 00:00:07 [error]: AxiosError: Request failed with status code 400
+    at settle (F:\node_demo\node_modules\axios\lib\core\settle.js:20:7)
+    at IncomingMessage.handleStreamEnd (F:\node_demo\node_modules\axios\lib\adapters\http.js:844:13)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (F:\node_demo\node_modules\axios\lib\core\Axios.js:46:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\integrations\sinay\sinay.client.ts:56:30)
+    at async SinayClient.withRetry (F:\node_demo\src\integrations\sinay\sinay.client.ts:68:20)
+    at async ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:80:33)
+    at async Task._execution (F:\node_demo\src\jobs\sync-shipments.job.ts:41:21)
+2026-03-10 00:00:07 [error]: Error: Failed to track shipment: Request failed with status code 400
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:131:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Task._execution (F:\node_demo\src\jobs\sync-shipments.job.ts:41:21)
+2026-03-10 00:53:17 [error]: Sinay API error: 400 /shipment
+2026-03-10 00:53:17 [error]: Sinay API error detail: WRONG_NUMBER
+2026-03-10 00:53:17 [error]: Error: Tracking failed: WRONG_NUMBER
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:138:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\modules\shipment\shipment.controller.ts:88:24)
+2026-03-10 16:00:30 [error]: Sinay API error: undefined /shipment
+2026-03-10 16:01:17 [error]: Sinay API error: undefined /shipment
+2026-03-10 16:01:33 [error]: Sinay API error: 400 /shipment
+2026-03-10 16:01:33 [error]: Sinay API error detail: WRONG_NUMBER
+2026-03-10 16:01:33 [error]: Error: Tracking failed: WRONG_NUMBER
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:138:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Task._execution (F:\node_demo\src\jobs\sync-shipments.job.ts:41:21)
+2026-03-10 20:00:25 [error]: Sinay API error: 400 /shipment
+2026-03-10 20:00:25 [error]: Sinay API error detail: WRONG_NUMBER
+2026-03-10 20:00:25 [error]: Error: Tracking failed: WRONG_NUMBER
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:138:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Task._execution (F:\node_demo\src\jobs\sync-shipments.job.ts:41:21)
+2026-03-10 21:24:37 [error]: Error: Greeting never received
+    at SMTPConnection._formatError (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._onError (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:795:20)
+    at Timeout.<anonymous> (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:729:22)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+2026-03-10 21:24:48 [error]: Error: Greeting never received
+    at SMTPConnection._formatError (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._onError (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:795:20)
+    at Timeout.<anonymous> (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:729:22)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+2026-03-10 21:24:52 [error]: Error: Greeting never received
+    at SMTPConnection._formatError (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._onError (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:795:20)
+    at Timeout.<anonymous> (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:729:22)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+2026-03-10 21:26:06 [error]: Error: Greeting never received
+    at SMTPConnection._formatError (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._onError (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:795:20)
+    at Timeout.<anonymous> (F:\node_demo\node_modules\nodemailer\lib\smtp-connection\index.js:729:22)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+2026-03-10 21:30:40 [error]: Error: queryA ETIMEOUT smtp.gmail.com
+    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/callback_resolver:45:19)
+2026-03-10 21:33:35 [error]: Error: Client network socket disconnected before secure TLS connection was established
+    at TLSSocket.onConnectEnd (node:_tls_wrap:1702:19)
+    at TLSSocket.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-03-10 21:46:03 [error]: Resend API Error: {"statusCode":403,"name":"validation_error","message":"You can only send testing emails to your own email address (dhanesha1210@gmail.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain."}
+2026-03-10 21:46:03 [error]: Error: You can only send testing emails to your own email address (dhanesha1210@gmail.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain.
+    at CommunicationService.sendEmail (F:\node_demo\src\modules\communication\communication.service.ts:93:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async AssignmentService.sendAssignmentEmail (F:\node_demo\src\modules\shipment\assignment.service.ts:67:9)
+    at async <anonymous> (F:\node_demo\src\modules\shipment\assignment.controller.ts:37:9)
+2026-03-10 21:48:19 [error]: Resend API Error: {"statusCode":403,"name":"validation_error","message":"You can only send testing emails to your own email address (dhanesha1210@gmail.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain."}
+2026-03-10 21:48:19 [error]: Error: You can only send testing emails to your own email address (dhanesha1210@gmail.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain.
+    at CommunicationService.sendEmail (F:\node_demo\src\modules\communication\communication.service.ts:99:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async AssignmentService.sendAssignmentEmail (F:\node_demo\src\modules\shipment\assignment.service.ts:67:9)
+    at async <anonymous> (F:\node_demo\src\modules\shipment\assignment.controller.ts:37:9)
+2026-03-11 16:00:33 [error]: Sinay API error: undefined /shipment
+2026-03-11 16:01:36 [error]: Sinay API error: undefined /shipment
+2026-03-11 16:02:07 [error]: Sinay API error: undefined /shipment
+2026-03-11 16:02:39 [error]: Sinay API error: undefined /shipment
+2026-03-11 16:02:39 [error]: AxiosError: timeout of 30000ms exceeded
+    at RedirectableRequest.handleRequestTimeout (F:\node_demo\node_modules\axios\lib\adapters\http.js:908:13)
+    at RedirectableRequest.emit (node:events:508:28)
+    at Timeout._onTimeout (F:\node_demo\node_modules\follow-redirects\index.js:221:12)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+    at Axios.request (F:\node_demo\node_modules\axios\lib\core\Axios.js:46:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async <anonymous> (F:\node_demo\src\integrations\sinay\sinay.client.ts:54:30)
+    at async SinayClient.withRetry (F:\node_demo\src\integrations\sinay\sinay.client.ts:66:20)
+    at async ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:93:33)
+    at async Task._execution (F:\node_demo\src\jobs\sync-shipments.job.ts:41:21)
+2026-03-11 16:02:39 [error]: Error: Failed to track shipment: timeout of 30000ms exceeded
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:151:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Task._execution (F:\node_demo\src\jobs\sync-shipments.job.ts:41:21)
+2026-03-11 16:02:43 [error]: Sinay API error: 400 /shipment
+2026-03-11 16:02:43 [error]: Sinay API error detail: WRONG_NUMBER
+2026-03-11 16:02:43 [error]: Error: Tracking failed: WRONG_NUMBER
+    at ShipmentService.trackShipment (F:\node_demo\src\modules\shipment\shipment.service.ts:148:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Task._execution (F:\node_demo\src\jobs\sync-shipments.job.ts:41:21)
+2026-03-13 00:24:41 [error]: Error: Client network socket disconnected before secure TLS connection was established
+    at TLSSocket.onConnectEnd (node:_tls_wrap:1702:19)
+    at TLSSocket.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-03-13 00:25:51 [error]: Error: Client network socket disconnected before secure TLS connection was established
+    at TLSSocket.onConnectEnd (node:_tls_wrap:1702:19)
+    at TLSSocket.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+2026-03-14 11:50:01 [error]: Error: Client network socket disconnected before secure TLS connection was established
+    at TLSSocket.onConnectEnd (node:_tls_wrap:1702:19)
+    at TLSSocket.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
