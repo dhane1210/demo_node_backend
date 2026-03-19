@@ -1,0 +1,21 @@
+services:
+  backend:
+    image: 'nipunmalinga/logistics-demo-app-backend'
+    env_file:
+      - .env
+    networks:
+      logistics-network:
+    ports:
+      - 3000:3000
+
+  frontend:
+    image: 'nipunmalinga/logistics-demo-app-frontend'
+    env_file:
+      - .env
+    networks:
+      logistics-network:
+    ports:
+      - 5000:80
+
+networks:
+  logistics-network:
