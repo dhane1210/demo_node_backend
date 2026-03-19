@@ -13,7 +13,7 @@ import app from './app';
 async function bootstrap(): Promise<void> {
     try {
         logger.info('🚀 Starting Logistics Tracking Backend...');
-        logger.info(Environment: ${config.nodeEnv});
+        logger.info(`Environment: ${config.nodeEnv}`);
 
         // Initialize database
         logger.info('Initializing database...');
@@ -34,7 +34,7 @@ async function bootstrap(): Promise<void> {
 
         // Start server (IMPORTANT: bind to 0.0.0.0)
         app.listen(config.port, '0.0.0.0', () => {
-            logger.info(🚀 Server running on port ${config.port});
+            logger.info(`🚀 Server running on port ${config.port}`);
         });
 
         // Graceful shutdown
